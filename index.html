@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Flights</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<a id="search" class="btn btn-default">Find flights!</a>
+				<!-- <button id="search" class="btn btn-default" onclick="getURL()">TEST</button> -->
+
+				<!-- <div class="col-md-2">
+					<div class="form-group">
+						<input type="text" class="form-control" id="origin" placeholder="Origin" />
+					</div>
+				</div>   --> 
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" id="destination" placeholder="Destination" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" id="departure" placeholder="Departure Date (YYYY-MM-DD)" />
+					</div>
+				</div>
+				<!-- <div class="col-md-2">
+					<div class="form-group">
+					<input type="text" class="form-control" id="return" placeholder="Return Date (YYYY-MM-DD)" />
+				</div> -->
+				</div>
+			</div>
+			<div class="chart">	</div>
+
+			<p id="info">Flight Information</p>
+		</div>
+
+		<script type="text/javascript" src="app.js"></script>
+  	</body>
+</html>
