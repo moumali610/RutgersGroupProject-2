@@ -1,0 +1,482 @@
+#
+# Sources description
+#
+
+# That one is completely empty on purpose
+feed:
+
+
+airports:
+    paths     : Airports/GeoNames/airports_geonames_only_clean.csv
+    key_fields: iata_code
+    delimiter : ^
+    join:
+        - fields: country_code
+          with  : [countries, code]
+        - fields: city_code
+          with  : [ori_por, iata_code]
+    headers   :
+        - iata_code
+        - name
+        - city_code
+        - country_code
+        - country_name
+        - lat
+        - lng
+
+
+countries:
+    paths     :
+        #- /thing/that/does/not/exist
+        - Countries/countryInfo.txt
+        - 'http://download.geonames.org/export/dump/countryInfo.txt'
+    key_fields: code
+    delimiter : "\t"
+    subdelimiters :
+        languages : ','
+        neighbors : ','
+    join:
+        - fields: currency_code
+          with  : [currencies, currency_code]
+        - fields: continent
+          with  : [continents, code]
+        - fields: neighbors
+          with  : [countries, code]
+    headers   :
+        - code
+        - iso_alpha3
+        - iso_numeric
+        - fips_code
+        - name
+        - capital
+        - area_in_sq_km
+        - population
+        - continent
+        - tld
+        - currency_code
+        - currency_name
+        - phone
+        - postal_code_format
+        - postal_code_regex
+        - languages
+        - geoname_id
+        - neighbors
+
+
+capitals:
+    paths     : Countries/capitals.csv
+    key_fields: country_code
+    delimiter : ^
+    join:
+        - fields: country_code
+          with  : [countries, code]
+    headers   :
+        - country_code
+        - capital_name
+        - country_name
+        - area_in_sq_km
+        - population
+        - lat
+        - lng
+
+
+continents:
+    paths     : Continents/continentCodes.txt
+    key_fields: code
+    delimiter : "\t"
+    headers   :
+        - code
+        - name
+        - geoname_id
+
+
+stations:
+    paths     : TrainStations/DataGouvFr/RFF_gares.ids.gm.man.red.csv
+    key_fields: code
+    delimiter : ^
+    subdelimiters :
+        lines: ','
+    headers   :
+        - code
+        - lines
+        - name
+        - info
+        - lat
+        - lng
+
+
+stations_nls:
+    paths     : TrainStations/NLS/NLS_CODES_RefDataSNCF.csv
+    key_fields: nls_code
+    delimiter : ','
+    headers   :
+        - uic_code
+        - name
+        - nls_code
+        - physical
+
+
+stations_uic:
+    paths     : TrainStations/UIC/sncfExtract_v1.0.csv
+    key_fields: uic_code
+    delimiter : ','
+    headers   :
+        - uic_code
+        - name
+        - lat
+        - lng
+
+
+languages:
+    paths     :
+        - Languages/iso-languagecodes.txt
+        - 'http://download.geonames.org/export/dump/iso-languagecodes.txt'
+    key_fields: code
+    delimiter : "\t"
+    skip      : 1
+    headers   :
+        - code
+        - code_iso_2
+        - code_iso_1
+        - name
+
+
+timezones:
+    paths     :
+        - file : TimeZones/timeZones.txt
+        - file : 'http://download.geonames.org/export/dump/timeZones.txt'
+    key_fields: code
+    delimiter : "\t"
+    skip      : 1
+    join:
+        - fields: country_code
+          with  : [countries, code]
+    headers   :
+        - country_code
+        - code
+        - gmt_offset
+        - dst_offset
+        - raw_offset
+
+
+cities:
+    paths     :
+        - file    : Cities/cities15000.zip
+          extract : cities15000.txt
+        - file    : 'http://download.geonames.org/export/dump/cities15000.zip'
+          extract : cities15000.txt
+    key_fields: code
+    delimiter : "\t"
+    subdelimiters :
+        alternatenames : ','
+    join:
+        - fields: country_code
+          with  : [countries, code]
+        - fields: timezone
+          with  : [timezones, code]
+        - fields: fclass
+          with  : [feature_classes, fclass]
+        - fields: fcode
+          with  : [feature_codes, fcode]
+    headers   :
+        - code
+        - name
+        - asciiname
+        - alternatenames
+        - lat
+        - lng
+        - fclass
+        - fcode
+        - country_code
+        - cc2
+        - admin1
+        - admin2
+        - admin3
+        - admin4
+        - population
+        - elevation
+        - dem
+        - timezone
+        - modification
+
+
+ori_por:
+    paths         : &ori_por_paths
+        - Por/Ori/ori_por_public.csv
+        - 'https://github.com/opentraveldata/optd/raw/trunk/refdata/ORI/ori_por_public.csv'
+    key_fields    : iata_code
+    indices       :
+        - iata_code
+        #- [iata_code, country_code]
+    limit         : # put a number to load only the first lines
+    skip          : 1 # put a number to skip the first lines
+    discard_dups  : false # This is the default behavior anyway
+    delimiter     : ^
+    subdelimiters : &ori_por_subdel
+        # Here you may put '' to
+        # split every char 'AB' -> ['A', 'B']
+        location_type    : ''
+        alt_name_section : ['=', '|']
+        tvl_por_list     : ','
+    join          : &ori_por_join
+        - fields: country_code
+          with  : [countries, code]
+        - fields: timezone
+          with  : [timezones, code]
+        # Freaking auto join possibility
+        - fields: tvl_por_list
+          with  : [ori_por, iata_code]
+        - fields: city_code
+          with  : [ori_por, iata_code]
+        - fields: continent_name
+          with  : [continents, name]
+        - fields: location_type
+          with  : [location_types, location_type]
+        - fields: fclass
+          with  : [feature_classes, fclass]
+        - fields: fcode
+          with  : [feature_codes, fcode]
+        # Join on multiple fields examples
+        #- fields: [country_code, country_name]
+        #  with  : [countries, [code, name]]
+    headers : &ori_por_headers
+        - iata_code
+        - icao_code
+        - faa_code
+        - is_geonames
+        - geoname_id
+        - valid_id
+        - name
+        - asciiname
+        - lat           # is latitude  in ori_por headers
+        - lng           # is longitude in ori_por headers
+        - fclass
+        - fcode
+        - page_rank
+        - date_from
+        - date_until
+        - comment
+        - country_code
+        - cc2
+        - country_name
+        - continent_name
+        - adm1_code
+        - adm1_name_utf
+        - adm1_name_ascii
+        - adm2_code
+        - adm2_name_utf
+        - adm2_name_ascii
+        - adm3_code
+        - adm4_code
+        - population
+        - elevation
+        - gtopo30
+        - timezone
+        - gmt_offset
+        - dst_offset
+        - raw_offset
+        - moddate
+        - city_code
+        - city_name_utf
+        - city_name_ascii
+        - tvl_por_list
+        - state_code
+        - location_type
+        - wiki_link
+        - alt_name_section
+
+
+ori_por_non_iata:
+    paths         :
+        - Por/Ori/ori_por_non_iata.csv
+        - 'https://github.com/opentraveldata/optd/raw/trunk/refdata/ORI/ori_por_non_iata.csv'
+    key_fields    : iata_code
+    delimiter     : ^
+    skip          : 1
+    subdelimiters : *ori_por_subdel
+    headers       : *ori_por_headers
+    join          : *ori_por_join
+
+
+currencies:
+    paths     : Currencies/wiki_source_ISO_4217.csv
+    key_fields: currency_code
+    delimiter : ;
+    subdelimiters :
+        countries : ','
+    join:
+        - fields: countries
+          with  : [countries, name]
+    headers   :
+        - currency_code
+        - numeric_code
+        - digits_number
+        - currency_name
+        - countries
+
+
+airlines:
+    paths     :
+        - Airlines/ori_airlines.csv
+        - 'https://github.com/opentraveldata/optd/raw/trunk/refdata/ORI/ori_airlines.csv'
+    key_fields: unified_code
+    delimiter : ^
+    skip      : 1
+    headers   :
+        - unified_code
+        - 3char_code
+        - 2char_code
+        - num_code
+        - name
+        - name2
+        - alliance_code
+        - alliance_status
+
+
+cabins:
+    paths     : Cabins/cabins.csv
+    key_fields: code
+    delimiter : ^
+    headers   :
+        - code
+        - name
+
+
+locales:
+    paths     : Locales/locales.csv
+    key_fields: locale
+    delimiter : ;
+    headers   :
+        - locale
+        - title
+        - language
+        - territory
+        - revision
+        - date
+        - codeset
+
+
+location_types:
+    paths     : LocationTypes/location_types.csv
+    key_fields: location_type
+    delimiter : ^
+    headers   :
+        - location_type
+        - name
+
+
+feature_classes:
+    paths     : FeatureClasses/feature_classes.csv
+    key_fields: fclass
+    delimiter : ^
+    headers   :
+        - fclass
+        - name
+
+
+feature_codes:
+    paths     : FeatureCodes/featureCodes_en.txt
+    key_fields: fcode
+    delimiter : "\t"
+    join:
+        - fields: fclass
+          with  : [feature_classes, fclass]
+    headers   :
+        - fclass
+        - fcode
+        - name
+        - description
+
+
+geonames_FR:
+    paths     :
+        - file    : Por/GeoNames/FR.zip
+          extract : FR.txt
+        - file    : 'http://download.geonames.org/export/dump/FR.zip'
+          extract : FR.txt
+    key_fields: geoname_id
+    delimiter : "\t"
+    subdelimiters :
+        alternatenames : ','
+    join: &geonames_join
+        - fields: country_code
+          with  : [countries, code]
+        - fields: timezone
+          with  : [timezones, code]
+        - fields: fclass
+          with  : [feature_classes, fclass]
+        - fields: fcode
+          with  : [feature_codes, fcode]
+    headers   : &geonames_headers
+        - geoname_id
+        - name
+        - asciiname
+        - alternatenames
+        - lat
+        - lng
+        - fclass
+        - fcode
+        - country_code
+        - cc2
+        - adm1_code
+        - adm2_code
+        - adm3_code
+        - adm4_code
+        - population
+        - elevation
+        - dem
+        - timezone
+        - moddate
+
+
+geonames_MC:
+    paths     :
+        - file    : Por/GeoNames/MC.zip
+          extract : MC.txt
+        - file    : 'http://download.geonames.org/export/dump/MC.zip'
+          extract : MC.txt
+    key_fields: geoname_id
+    delimiter : "\t"
+    subdelimiters :
+        alternatenames : ','
+    headers   : *geonames_headers
+    join      : *geonames_join
+
+
+postal_codes_FR:
+    paths     :
+        - file    : PostalCodes/GeoNames/FR.zip
+          extract : FR.txt
+        - file    : 'http://download.geonames.org/export/zip/FR.zip'
+          extract : FR.txt
+    key_fields: &postal_codes_key postal_code
+    delimiter : "\t"
+    join      : &postal_code_join
+        - fields: country_code
+          with  : [countries, code]
+    headers   : &postal_codes_headers
+        - country_code
+        - postal_code
+        - name
+        - adm1_name
+        - adm1_code
+        - adm2_name
+        - adm2_code
+        - adm3_name
+        - adm3_code
+        - lat
+        - lng
+        - accuracy
+
+
+postal_codes_MC:
+    paths     :
+        - file    : PostalCodes/GeoNames/MC.zip
+          extract : MC.txt
+        - file    : 'http://download.geonames.org/export/zip/MC.zip'
+          extract : MC.txt
+    key_fields: *postal_codes_key
+    delimiter : "\t"
+    headers   : *postal_codes_headers
+    join      : *postal_code_join
+
