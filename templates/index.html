@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>From New York, with LOVE</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">
+    <img src="bird.jpg" alt="logo" style="width:40px;">
+  </a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link 3</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>From New York, with LOVE</h1>
+    <p>ChiViMe is an online travel agency commited to providing NYC travelers a vacation of their dreams without breaking the bank!!</p>
+  </div>
+</div>
+
+<div class="container">
+ <!-- Our columns function in rows. -->
+    <div class="row">
+      <!--First of Two Columns-->
+      <div class="col-md-8">
+        <div class="text-center">
+
+
+
+          <header>
+              <h1>Start Here: </h1>
+          </header>
+
+<!-- drop down bar -->
+        <h4>SELECT Airport:</h4>
+        <select id="selDataset" onchange="optionChanged(this.value)"></select>
+
+            <main class="container">
+                <section id="main-bio">
+                    <section id="figure">
+                       <a href="Viz-Temp-Page.html"><img class="img-fluid" src="Temperature.png" width="460" height="345" title="MaxTemperature"></a>
+                    </section>
+                        <p>  The purpose of this project was to analyze how weather chances as you get closer to the equator. To accomplish this analysis, we first pulled the data from the OpenWeatherMap API to assemble a dataset on over 500 cities.
+                    <br>
+                    <br>
+                    After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs. latitude. Factors we looked at included: temperature, cloudiness, wind speed, and humidity. This site provides the source data and visualizations created as part of the analysis, as well as explanations and descriptions of any trends and correlations witnessed. justice improve age article between. No projection as up preference reasonably delightful celebrated. Preserved and abilities assurance tolerably breakfast use saw. And painted letters forming far village elderly compact. Her rest west each spot his and you knew. Estate gay wooded depart six far her. Of we be have it lose gate bred. Do separate removing or expenses in. Had covered but evident chapter matters anxious
+                        </p>
+                </section>
+
+
+
+        </div>
+        </div>
+      <!--Second of Two Columns-->
+      <div class="col-md-4">
+          <header>
+        <h1>Visualizations</h1>
+              </header>
+
+        <div class="row">
+  <div class="column">
+      <a href="Viz-Temp-Page.html"><img src="Temperature.png" style="width:48%" title="MaxTemperature"></a>
+      <a href="Viz-Humid-Page.html"><img src="Humidity.png" style="width:48%" title="Humidity"></a>
+      <a href="Viz-Cloud-Page.html"><img src="Cloudiness.png" style="width:48%" title="Cloudiness"></a>
+      <a href="Viz-Wind-Page.html"><img src="Wind_Speed.png" style="width:48%"title="Wind_Speed"></a>
+  </div>
+
+
+
+</body>
+</html>
