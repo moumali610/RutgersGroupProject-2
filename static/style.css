@@ -1,6 +1,16 @@
 .ui-autocomplete-category {
     font-weight: bold;
-    padding: .2em .4em;
     margin: .8em 0 .2em;
     line-height: 1.5;
+    list-style-type: none;
   }
+
+.ui-autocomplete {
+    background: #FFFF;
+    z-index:2;
+  }
+
+.ui-menu-item {
+    list-style-type: none;
+    text-indent: 25px;
+}

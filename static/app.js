@@ -18,9 +18,9 @@ function init() {
         
         dropdown.append(dropDownOption);   
         }
-}) //close paren for names d3.json
+      }) //close paren for names d3.json
 
-$( function() {
+  $( function() {
     $.widget( "custom.catcomplete", $.ui.autocomplete, {
       _create: function() {
         this._super();
