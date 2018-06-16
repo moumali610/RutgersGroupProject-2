@@ -8,13 +8,15 @@ var departureInput = document.getElementById("departure");
 // Add event lister to button, call handleSearchButtonClick when clicked
 searchBtn.addEventListener("click", handleSearchButtonClick);
 
-// create empty lists for fare, duration, and airport
-totalFare = [];
-totalDuration = [];
-nycAirports = [];
 
 // create handleSearchButtonClick function to call api
 function handleSearchButtonClick() {
+
+    // create empty lists for fare, duration, and airport
+    totalFare = [];
+    totalDuration = [];
+    nycAirports = [];
+
     //var filterOrigin = $originInput.value.trim().toLowerCase();
     var filterDestination = destinationInput.value.trim().toLowerCase();
     var filterDeparture = departureInput.value.trim();
@@ -22,7 +24,7 @@ function handleSearchButtonClick() {
 
     var key = "PHJmVRmr1DGotzz8YPFk92iTGAl3bGIQ";
     var url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + key + "&origin=NYC&destination=" + filterDestination + "&departure_date=" + filterDeparture;
-    console.log(url);    
+    //console.log(url);    
 
     // create a new request object 
     var request = new XMLHttpRequest();
@@ -44,22 +46,27 @@ function handleSearchButtonClick() {
             var results = response.results
             //console.log(results[0].fare.total_price)
 
-            // // create empty lists for fare, duration, and airport
-            // totalFare = []
-            // totalDuration = []
-            // nycAirports = []
-
             for (var i = 0; i < results.length; i++) {
                 var fare = results[i].fare.total_price;
-                totalFare.push(fare);
+                //totalFare.push(fare);
 
                 var itineraries = results[i].itineraries
                 //console.log(itineraries)
                 for (var j = 0; j < itineraries.length; j++) {
                     var duration = itineraries[j].outbound.duration
+
+                    // convert hh:mm time to minutes
+                    var a = duration.split(":");
+                    var minutes = (+a[0] * 60 + (+a[1])) // multiple hh value by 60
+                    //console.log(minutes)
+                    
+                    //console.log("Length of travel: " + duration + " minutes")
+                    //console.log("Total fare: $" + fare)
+
                     var flights = itineraries[j].outbound.flights
-                    //console.log(duration)
-                    totalDuration.push(duration)
+
+                    totalFare.push(fare)
+                    totalDuration.push(minutes)
                     
                     originAirports = []
                     for (var k = 0; k < flights.length; k++) {
@@ -72,10 +79,9 @@ function handleSearchButtonClick() {
                 nycAirports.push(originAirports[0]);
                 }
             }
-        console.log(totalFare);
-        console.log(totalDuration);
-        console.log(nycAirports)
+        // console.log(totalFare);
+        // console.log(totalDuration);
+        // console.log(nycAirports);
         }
     };
 };
-
