@@ -9,12 +9,15 @@
 		<link rel="icon" href="favicon.ico">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" />
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-		<!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+		
 
 	</head>
 	<body>
@@ -39,11 +42,8 @@
 		</nav> <br>
 		<div class="container">
 			<div class="row">
-				<!-- <div class="col-md-2">
-					<div class="form-group">
-						<input type="text" class="form-control" id="origin" placeholder="Origin" />
-					</div>
-				</div>   --> 
+
+				<!-- Input boxes -->
 				<div class="col-md-4">
 					<div class="form-group">
 						<input type="text" class="form-control" id="destination" placeholder="Destination" />
@@ -54,18 +54,19 @@
 						<input type="text" class="form-control" id="departure" placeholder="Departure Date (YYYY-MM-DD)" />
 					</div>
 				</div>
-				<!-- <div class="col-md-2">
-					<div class="form-group">
-					<input type="text" class="form-control" id="return" placeholder="Return Date (YYYY-MM-DD)" />
-				</div> -->
+				
 				<a id="search" class="btn btn-light">Find flights!</a>
 				</div>
 				<p>Please note: Your departure date has to be within the next 361 days.</p>
-				<div id="chart">	</div>
 
+				<!-- Chart -->
+				<div id="chart"></div>
+
+				<!-- Flight data table-->
+				<table id="myTable" class="table table-hover table-bordered thead-dark"></table>
 			</div>
 		</div>
 
-		<script type="text/javascript" src="app.js"></script>
+		<script type="text/javascript" src="test.js"></script>
   	</body>
 </html>
