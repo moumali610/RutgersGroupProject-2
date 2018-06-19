@@ -1,25 +1,8 @@
 
 
 function init() {
-    var dropdown = document.getElementById("selDataset");
-    var namesURL = "../names";
 
-    d3.json(namesURL, function(error,response){
-        // Handle errors
-        if (error) return console.log(error);
-        
-        // populate dropdowns with airport names
-        for(var i = 0 ; i <response.length; i++){
-        var dropDownOption = document.createElement("option");
-
-        var item = response[i];
-        
-        dropDownOption.innerHTML = item;
-        
-        dropdown.append(dropDownOption);   
-        }
-      }) //close paren for names d3.json
-
+ //function to create catcomplete widget which is used as a search autocomplete for airports
   $( function() {
     $.widget( "custom.catcomplete", $.ui.autocomplete, {
       _create: function() {
@@ -42,6 +25,7 @@ function init() {
         });
       }
     });
+    //need to remap to airport information
     var data = [
       { label: "anders", category: "" },
       { label: "andreas", category: "" },
@@ -56,7 +40,8 @@ function init() {
  
     $( "#search" ).catcomplete({
       delay: 0,
-      source: data
+      minLength: 3,
+      source: "/airports"
     });
   } );
 }; //close paren for init
