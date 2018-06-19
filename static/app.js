@@ -40,7 +40,8 @@ function init() {
  
     $( "#search" ).catcomplete({
       delay: 0,
-      source: data
+      minLength: 3,
+      source: "/airports"
     });
   } );
 }; //close paren for init
