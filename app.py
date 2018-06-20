@@ -55,19 +55,13 @@ def setup():
 @app.route('/airports')
 def airport():
 
-    sel = [Airports.iati_code, Airports.name, Airports.city_code,Airports.city_name, Airports.country_code, Airports.country, Airports.lat, Airports.long]
+    sel = [Airports.iati_code, Airports.name, Airports.city_code,Airports.city_name, Airports.country, Airports.lat, Airports.long]
     
     results = db.session.query(*sel).all()
-    df = pd.DataFrame(results, columns=['iati_code', 'name','city_code','city_name','country_code','country','lat','long'])
+    df = pd.DataFrame(results, columns=['_iati_code', '_name','city_code','city_name','country','lat','long'])
     
-    query_dict = df.to_dict(orient="records")
-    airport_dict = []
-
-    for item in query_dict:
-        i = {'label': '(' + item['iati_code'] + ') ' + item['name'] ,'category': str(item['city_name']) + ', ' + str(item['country'])}
-        airport_dict.append(i)
     
-    return jsonify(airport_dict)
+    return jsonify(df.to_dict(orient="records"))
 
 
 # create route that renders index.html template
