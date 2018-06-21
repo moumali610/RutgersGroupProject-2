@@ -1,4 +1,60 @@
-body {
-    padding: 50px;
+.ui-autocomplete-category {
+    font-weight: bold;
+    margin: .8em 0 .2em;
+    line-height: 1.5;
+    list-style-type: none;
+  }
+
+.ui-autocomplete {
+    background: #FFFF;
+    z-index:2;
+  }
+
+.ui-menu-item {
+    list-style-type: none;
+    text-indent: 25px;
 }
 
+.background {
+  top: 10px;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: 400px;
+  content: " ";
+  background-image: url("airplane.jpg");
+  background-repeat: no-repeat;
+  background-position: 30% 50%;
+  background-size: cover;
+  opacity: 0.3;
+}
+
+.clockdate-wrapper {
+  padding:25px;
+  width:100%;
+  text-align: center;
+  border-radius:5px;
+  margin: 0 auto;
+  bottom: 0px;
+  right: 0px;
+}
+#clock{
+  font-family: sans-serif;
+  font-size:200px;
+  text-shadow:0px 0px 1px #888;
+  color:#fff;
+}
+#clock span {
+  color:#fff;
+  text-shadow:0px 0px 1px #333;
+  font-size:60px;
+  position: relative;
+  top:-27px;
+  left:-10px;
+}
+#date {
+  letter-spacing:10px;
+  font-size:30px;
+  font-family:arial,sans-serif;
+  color:#fff;
+}
