@@ -1,8 +1,16 @@
+.jumbotron {
+    background-image: url("../img/NYC.jpeg");
+    background-color: #cccccc;
+    background-size: cover;
+
+}
+
 #map,
 body,
 html {
   height: 100%;
 }
+
 .background {
   top: 10px;
   z-index: -1;
@@ -46,3 +54,4 @@ html {
   font-family:arial,sans-serif;
   color:#fff;
 }
+/* set map, body, and html to 100% of the screen size */
