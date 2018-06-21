@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Flights</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></link>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" />
+
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>-->
+		<script src="https://momentjs.com/downloads/moment.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+		
+
+	</head>
+	<body onload="startTime()">
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<!-- Brand/logo -->
+			<a class="navbar-brand" href="#">
+				<img src="{{ url_for('static', filename='heart.png') }}" alt="logo" style="width:40px;">
+			</a>
+				  
+				<!-- Links -->
+			<ul class="navbar-nav">
+		    	<li class="nav-item">
+					<a class="nav-link" href="flights.html">Link 1</a>
+				</li>
+		    	<li class="nav-item">
+					<a class="nav-link" href="#">Link 2</a>
+	     		</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Link 3</a>	
+				</li>
+			</ul>
+		</nav> <br>
+		<div class="position-sticky background">
+			<div id="clockdate">
+				<div class="clockdate-wrapper">
+				  <div id="clock"></div>
+				  <div id="date"></div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+
+				<!-- Input boxes -->
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" id="destination" placeholder="Destination" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<input type="text" class="form-control" id="departure" placeholder="Departure Date (YYYY-MM-DD)" />
+					</div>
+				</div>
+				
+				<a id="search" class="btn btn-light">Find flights!</a>
+				</div>
+				<p>Please note: Your departure date has to be within the next 361 days.</p>
+
+				<!-- Chart -->
+				<div id="chart"></div>
+
+				<!-- Flight data table-->
+				<table id="myTable" class="table table-hover table-bordered thead-dark"></table>
+			</div>
+		</div>
+
+		<script src="{{ url_for('static', filename='flightapp.js') }}"></script>
+  	</body>
+</html>
