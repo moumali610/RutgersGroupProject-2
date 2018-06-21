@@ -63,6 +63,10 @@ def airport():
     
     return jsonify(df.to_dict(orient="records"))
 
+# create route that renders airports.html template
+@app.route("/map")
+def map():
+    return render_template("airports.html")
 
 # create route that renders index.html template
 @app.route("/")
