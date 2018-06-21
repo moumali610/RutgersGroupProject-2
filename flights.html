@@ -12,15 +12,15 @@
 		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css" />
 
 		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script> -->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>-->
+		<script src="https://momentjs.com/downloads/moment.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 		<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 		
 
 	</head>
-	<body>
+	<body onload="startTime()">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 			<!-- Brand/logo -->
 			<a class="navbar-brand" href="index.html">
@@ -40,6 +40,14 @@
 				</li>
 			</ul>
 		</nav> <br>
+		<div class="position-sticky background">
+			<div id="clockdate">
+				<div class="clockdate-wrapper">
+				  <div id="clock"></div>
+				  <div id="date"></div>
+				</div>
+			</div>
+		</div>
 		<div class="container">
 			<div class="row">
 
@@ -66,7 +74,7 @@
 				<table id="myTable" class="table table-hover table-bordered thead-dark"></table>
 			</div>
 		</div>
-
+	
 		<script type="text/javascript" src="test.js"></script>
   	</body>
 </html>
