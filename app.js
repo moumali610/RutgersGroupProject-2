@@ -15,10 +15,13 @@ function handleSearchButtonClick() {
 
     // create empty lists for fare, duration, and airport
     totalFare = [];
-    totalDuration = [];
     nycAirports = [];
+    nycDepartTimes = [];
 
-    var dataSet = []
+    // create chartData array for chart
+    var chartData = []
+    // create dataSet array for flight data table
+    var dataSet = [];
 
     //var filterOrigin = $originInput.value.trim().toLowerCase();
     var filterDestination = destinationInput.value.trim().toLowerCase();
@@ -57,22 +60,17 @@ function handleSearchButtonClick() {
                 //console.log(itineraries)
                 for (var j = 0; j < itineraries.length; j++) {
                     var duration = itineraries[j].outbound.duration
-
-                    // convert hh:mm time to minutes
-                    var a = duration.split(":");
-                    var minutes = (+a[0] * 60 + (+a[1])) // multiple hh value by 60
-                    //console.log(minutes)
                     
                     //console.log("Length of travel: " + duration + " minutes")
                     //console.log("Total fare: $" + fare)
                     var flights = itineraries[j].outbound.flights
 
-                    totalFare.push(fare)
+                    //totalFare.push(fare)
                     //dataSet.push(fare)
 
-                    totalDuration.push(minutes)
-
+                    // get all data for origin airports and departure times
                     originAirports = []
+                    departTimes = []
                     for (var k = 0; k < flights.length; k++) {
                         var origin = flights[k].origin.airport;
                         var departTime = flights[k].departs_at;
@@ -80,26 +78,34 @@ function handleSearchButtonClick() {
                         var markAirline = flights[k].marketing_airline;
                         var opAirline = flights[k].operating_airline;
                         
-                        departTime = departTime.replace("T", " ");
-                        arriveTime = arriveTime.replace("T", " ");
+                        //console.log(departTime)
+                        var dt = new Date(departTime)
+                        var at = new Date(arriveTime)
 
+                        // convert departure datetime string to time format
+                        var depart = moment(departTime).format("HH:mm")
+                        //console.log(depart)
                         //console.log(origin)
+
                         originAirports.push(origin);
+                        departTimes.push(depart);
                         
-                        //console.log(dataSet)
                         // console.log(originAirports)
                         //console.log(fare)
                         //console.log("fare: "+fare +"," + "duration: "+duration+","+"origin: "+origin+","+"depart: "+departTime+","+"arrive"+arriveTime+","+"mark: "+markAirline+","+"op: "+opAirline)
                     
                     };
+                // push data to empty lists    
                 nycAirports.push(originAirports[0]);
-                dataSet.push([opAirline, markAirline, fare, originAirports, duration, departTime, arriveTime]);
-
+                //nycDepartTimes.push(departTimes[0]);
+                chartData.push({"fare": fare, "depart_time": departTimes[0]});
+                dataSet.push([opAirline, markAirline, fare, originAirports, duration, dt, at]);
+                
                 };
             };
         // console.log(totalFare);
-        // console.log(totalDuration);
         // console.log(nycAirports);
+        // console.log(nycDepartTimes)
         // console.log(dataSet)
 
         // create flight data table
@@ -115,26 +121,29 @@ function handleSearchButtonClick() {
                  {title: "Duration (hh:mm)"},
                  {title: "Departing Time"},
                  {title: "Arrival Time"}
-             ]
-         });
-     });
+                ]
+            });
+        });
+
+        // sort chartData by time
+        chartData.sort(function(a, b) {
+            return new Date('1970/01/01 ' + a.depart_time) - new Date('1970/01/01 ' + b.depart_time);
+        });
+        
+        for (var i = 0; i < chartData.length; i++) {
+            totalFare.push(chartData[i].fare);
+            nycDepartTimes.push(chartData[i].depart_time);
+        };
+
+        // console.log(totalFare);
+        // console.log(nycDepartTimes);
 
         // create scatterplot with populated list data    
         var flightData = [{
-            x: totalDuration,
+            x:  nycDepartTimes,
             y: totalFare,
             hovertext: nycAirports,
             mode: "markers",
-            markers: {
-                opacity: 0.5,
-                size: 20
-            },
-            selected: {
-                marker: {
-                    color: "red",
-                    size: 30
-                }
-            },
             type: "scatter"
         }];
 
@@ -142,10 +151,46 @@ function handleSearchButtonClick() {
         var flightLayout = {
             title: `<b>Available Flights for ${filterDeparture} to ${filterDestination}</b>`,
             yaxis: {title: "Total One-Way Fare ($)"},
-            xaxis: {title: "Duration of Flight (mins)"}
+            xaxis: {title: "Time of Departure from NYC"}
         };
 
         Plotly.newPlot("chart", flightData, flightLayout)
-        }        
+        };       
     };
+};
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+// display current time and date on page
+function startTime() {
+    var today = new Date();
+    var hr = today.getHours();
+    var min = today.getMinutes();
+    var sec = today.getSeconds();
+    ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
+    hr = (hr == 0) ? 12 : hr;
+    hr = (hr > 12) ? hr - 12 : hr;
+    //Add a zero in front of numbers<10
+    hr = checkTime(hr);
+    min = checkTime(min);
+    sec = checkTime(sec);
+    document.getElementById("clock").innerHTML = hr + ":" + min + ":" + sec + " " + ap;
+    
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var curWeekDay = days[today.getDay()];
+    var curDay = today.getDate();
+    var curMonth = months[today.getMonth()];
+    var curYear = today.getFullYear();
+    var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
+    document.getElementById("date").innerHTML = date;
+    
+    var time = setTimeout(function(){ startTime() }, 500);
+};
+
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
 };
