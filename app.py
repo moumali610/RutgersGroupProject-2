@@ -68,6 +68,11 @@ def airport():
 def map():
     return render_template("airports.html")
 
+# create route that renders flights.html template
+@app.route("/flights")
+def flight():
+    return render_template("flights.html")
+
 # create route that renders index.html template
 @app.route("/")
 def home():
