@@ -3,6 +3,9 @@ from sqlalchemy import func
 import numpy as np
 import pandas as pd
 import json
+import os
+import requests
+from keys import key 
 
 from flask import (
     Flask,
@@ -51,6 +54,14 @@ def setup():
 # Flask Routes
 #################################################
 
+@app.route('/countries.geojson')
+def countries():
+
+    json_data = open(os.path.join(os.path.dirname( __file__ ),"data", "countries_data.geojson"), "r")
+    
+    data = json.load(json_data)
+    return jsonify(data)
+
 # Query the database for names and send the jsonified results
 @app.route('/airports')
 def airport():
@@ -71,14 +82,24 @@ def map():
 # create route that renders flights.html template
 @app.route("/flights")
 def flight():
-    return render_template("flights.html")
+    return render_template("flights.html", key=key)
 
 # create route that renders index.html template
 @app.route("/")
 def home():
     return render_template("index.html")
 
+@app.route("/amadeus/<dest>/<dept_date>")
+def getAmadeus(dest, dept_date):
+    url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + key + "&origin=NYC&destination=" + dest + "&departure_date=" + dept_date
+
+    results = requests.get(url)
+
+    return jsonify(results.json())
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 
 

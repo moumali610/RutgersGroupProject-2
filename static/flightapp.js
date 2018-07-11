@@ -27,82 +27,68 @@ function handleSearchButtonClick() {
     var filterDestination = destinationInput.value.trim().toLowerCase();
     var filterDeparture = departureInput.value.trim();
     //var filterReturn = $returnInput.value.trim();
+    
+    // call amadeus route to do an api call to find fares
+    var url = "../amadeus/" + filterDestination + "/" + filterDeparture;
+    
+    d3.json(url, function(error,response){
+        // Handle errors
+        if (error) return console.log(error);
 
-    var key = "PHJmVRmr1DGotzz8YPFk92iTGAl3bGIQ";
-    var url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + key + "&origin=NYC&destination=" + filterDestination + "&departure_date=" + filterDeparture;
-    console.log(url);    
+        items = response.results
+        console.log(items)
+        for (var i = 0; i < items.length; i++) {
+            var fare = items[i].fare.total_price;
 
-    // create a new request object 
-    var request = new XMLHttpRequest();
+            var itineraries = items[i].itineraries
+            //console.log(itineraries)
+            for (var j = 0; j < itineraries.length; j++) {
+                var duration = itineraries[j].outbound.duration
+                
+                //console.log("Length of travel: " + duration + " minutes")
+                //console.log("Total fare: $" + fare)
+                var flights = itineraries[j].outbound.flights
 
-    // open the request
-    request.open("GET", url, true);
+                //totalFare.push(fare)
+                //dataSet.push(fare)
 
-    // send request
-    request.send();
-
-    // process and read request
-    request.onreadystatechange = processRequest;
-
-    // get data if api url is good 
-    function processRequest(data) {
-        if (request.readyState == 4 && request.status == 200) {
-            // parse though response and print json in console
-            var response = JSON.parse(request.responseText);
-            //console.log(response)
-            var results = response.results
-            //console.log(results[0].fare.total_price)
-
-            for (var i = 0; i < results.length; i++) {
-                var fare = results[i].fare.total_price;
-
-                var itineraries = results[i].itineraries
-                //console.log(itineraries)
-                for (var j = 0; j < itineraries.length; j++) {
-                    var duration = itineraries[j].outbound.duration
+                // get all data for origin airports and departure times
+                originAirports = []
+                departTimes = []
+                for (var k = 0; k < flights.length; k++) {
+                    var origin = flights[k].origin.airport;
+                    var departTime = flights[k].departs_at;
+                    var arriveTime = flights[k].arrives_at;
+                    var markAirline = flights[k].marketing_airline;
+                    var opAirline = flights[k].operating_airline;
                     
-                    //console.log("Length of travel: " + duration + " minutes")
-                    //console.log("Total fare: $" + fare)
-                    var flights = itineraries[j].outbound.flights
+                    //console.log(departTime)
+                    var dt = new Date(departTime)
+                    var at = new Date(arriveTime)
 
-                    //totalFare.push(fare)
-                    //dataSet.push(fare)
+                    // convert departure datetime string to time format
+                    var depart = moment(departTime).format("HH:mm")
+                    //console.log(depart)
+                    //console.log(origin)
 
-                    // get all data for origin airports and departure times
-                    originAirports = []
-                    departTimes = []
-                    for (var k = 0; k < flights.length; k++) {
-                        var origin = flights[k].origin.airport;
-                        var departTime = flights[k].departs_at;
-                        var arriveTime = flights[k].arrives_at;
-                        var markAirline = flights[k].marketing_airline;
-                        var opAirline = flights[k].operating_airline;
-                        
-                        //console.log(departTime)
-                        var dt = new Date(departTime)
-                        var at = new Date(arriveTime)
-
-                        // convert departure datetime string to time format
-                        var depart = moment(departTime).format("HH:mm")
-                        //console.log(depart)
-                        //console.log(origin)
-
-                        originAirports.push(origin);
-                        departTimes.push(depart);
-                        
-                        // console.log(originAirports)
-                        //console.log(fare)
-                        //console.log("fare: "+fare +"," + "duration: "+duration+","+"origin: "+origin+","+"depart: "+departTime+","+"arrive"+arriveTime+","+"mark: "+markAirline+","+"op: "+opAirline)
+                    originAirports.push(origin);
+                    departTimes.push(depart);
                     
-                    };
+                    // console.log(originAirports)
+                    //console.log(fare)
+                    //console.log("fare: "+fare +"," + "duration: "+duration+","+"origin: "+origin+","+"depart: "+departTime+","+"arrive"+arriveTime+","+"mark: "+markAirline+","+"op: "+opAirline)
+                
+                };
                 // push data to empty lists    
                 nycAirports.push(originAirports[0]);
                 //nycDepartTimes.push(departTimes[0]);
                 chartData.push({"fare": fare, "depart_time": departTimes[0]});
                 dataSet.push([opAirline, markAirline, fare, originAirports, duration, dt, at]);
-                
-                };
+            
             };
+        };
+    
+
         // console.log(totalFare);
         // console.log(nycAirports);
         // console.log(nycDepartTimes)
@@ -110,17 +96,17 @@ function handleSearchButtonClick() {
 
         // create flight data table
         $(document).ready(function() {
-         $("#myTable").DataTable( {
-             destroy: true,
-             data: dataSet,
-             columns : [
-                 {title: "Operating Airline"},
-                 {title: "Marketing Airline"},
-                 {title: "Total Fare ($)"},
-                 {title: "Departure Airport"},
-                 {title: "Duration (hh:mm)"},
-                 {title: "Departing Time"},
-                 {title: "Arrival Time"}
+            $("#myTable").DataTable( {
+                destroy: true,
+                data: dataSet,
+                columns : [
+                    {title: "Operating Airline"},
+                    {title: "Marketing Airline"},
+                    {title: "Total Fare ($)"},
+                    {title: "Departure Airport"},
+                    {title: "Duration (hh:mm)"},
+                    {title: "Departing Time"},
+                    {title: "Arrival Time"}
                 ]
             });
         });
@@ -154,11 +140,10 @@ function handleSearchButtonClick() {
             xaxis: {title: "Time of Departure from NYC"}
         };
 
-        Plotly.newPlot("chart", flightData, flightLayout)
-        };       
-    };
+        Plotly.newPlot("chart", flightData, flightLayout);
+    
+    });
 };
-
 //////////////////////////////////////////////////////////////////////////////////////
 
 // display current time and date on page
