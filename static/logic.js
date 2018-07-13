@@ -17,13 +17,17 @@ d3.json(url, function(response){
     var markers = L.markerClusterGroup();
 
     for (var i = 0; i < response.length; i++) {
-
-    var location = response[i].lat;
     
 
     if (location) {
-      markers.addLayer(L.marker([response[i].lat,response[i].long])
-        .bindPopup("IATI Code: " + response[i]._iati_code+ "<br>Name: " + response[i]._name+ "<br>Location: "+response[i].city_name+", "+ response[i].country));
+      markers.addLayer(L.marker([response[i].lat_dd,response[i].long_dd])
+        .bindPopup("IATI Code: " + response[i].loc_id+ 
+          "<br>Name: " + response[i].airport_name+ 
+          "<br>Location: "+ response[i].associated_city+", "+ response[i].state + 
+          "<br>NPIAS Type: " + response[i].npias_service_level +"/"+response[i].npias_hub_type +
+          "<br>Total Operations(annual # of departures and arrivals): "+response[i].total_operations
+        )
+      );
     }
   }
 myMap.addLayer(markers);
