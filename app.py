@@ -104,11 +104,11 @@ def airport():
         Airports.total_operations
         ]
     
-     results = db.session.query(*sel).all()
-     df = pd.DataFrame(results, columns=['faa_site_number', 'loc_id', 'airport_name', 'associated_city', 'state', 'region', 'ado', 'use', 'lat_dms', 'long_dms', 'lat_dd', 'long_dd', 'airport_ownership', 'part_139', 'npias_service_level', 'npias_hub_type', 'airport_control_tower', 'fuel', 'other_services', 'based_aircraft_total', 'total_operations'])
-    
-    
-     return jsonify(df.to_dict(orient="records"))
+    results = db.session.query(*sel).all()
+    df = pd.DataFrame(results, columns=['faa_site_number', 'loc_id', 'airport_name', 'associated_city', 'state', 'region', 'ado', 'use', 'lat_dms', 'long_dms', 'lat_dd', 'long_dd', 'airport_ownership', 'part_139', 'npias_service_level', 'npias_hub_type', 'airport_control_tower', 'fuel', 'other_services', 'based_aircraft_total', 'total_operations'])
+        
+        
+    return jsonify(df.to_dict(orient="records"))
 
 # create route that renders flights.html template
 @app.route("/flights")
