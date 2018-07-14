@@ -1,5 +1,6 @@
 # import necessary libraries
 from sqlalchemy import func
+from flask_pymongo import PyMongo
 import numpy as np
 import pandas as pd
 import json
@@ -13,6 +14,8 @@ from flask import (
     jsonify,
     request,
     redirect)
+
+#mongo = PyMongo(app)
 
 #################################################
 # Flask Setup
@@ -29,27 +32,27 @@ db = SQLAlchemy(app)
 
 class Airports(db.Model):
     __tablename__ = 'airports'
-        faa_site_number = db.Column(db.String, primary_key=True)
-        loc_id = db.Column(db.String)
-        airport_name = db.Column(db.String)
-        associated_city = db.Column(db.String)
-        state = db.Column(db.String)
-        region = db.Column(db.String)
-        ado = db.Column(db.String)
-        use = db.Column(db.String)
-        lat_dms = db.Column(db.String)
-        long_dms = db.Column(db.String)
-        lat_dd = db.Column(db.Float)
-        long_dd = db.Column(db.Float)
-        airport_ownership = db.Column(db.String)
-        part_139 = db.Column(db.String)
-        npias_service_level = db.Column(db.String)
-        npias_hub_type = db.Column(db.String)
-        airport_control_tower = db.Column(db.String)
-        fuel = db.Column(db.String)
-        other_services = db.Column(db.String)
-        based_aircraft_total = db.Column(db.Integer)
-        total_operations = db.Column(db.Integer)
+    faa_site_number = db.Column(db.String, primary_key=True)
+    loc_id = db.Column(db.String)
+    airport_name = db.Column(db.String)
+    associated_city = db.Column(db.String)
+    state = db.Column(db.String)
+    region = db.Column(db.String)
+    ado = db.Column(db.String)
+    use = db.Column(db.String)
+    lat_dms = db.Column(db.String)
+    long_dms = db.Column(db.String)
+    lat_dd = db.Column(db.Float)
+    long_dd = db.Column(db.Float)
+    airport_ownership = db.Column(db.String)
+    part_139 = db.Column(db.String)
+    npias_service_level = db.Column(db.String)
+    npias_hub_type = db.Column(db.String)
+    airport_control_tower = db.Column(db.String)
+    fuel = db.Column(db.String)
+    other_services = db.Column(db.String)
+    based_aircraft_total = db.Column(db.Integer)
+    total_operations = db.Column(db.Integer)
 
     def __repr__(self):
         return '<Airports %r>' % self.name
@@ -74,6 +77,7 @@ def countries():
     return jsonify(data)
 
 # Query the database for names and send the jsonified results
+
 @app.route('/airports')
 def airport():
 
