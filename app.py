@@ -77,7 +77,6 @@ def countries():
     return jsonify(data)
 
 # Query the database for names and send the jsonified results
-
 @app.route('/airports')
 def airport():
 
@@ -105,11 +104,11 @@ def airport():
         Airports.total_operations
         ]
     
-    results = db.session.query(*sel).all()
-    df = pd.DataFrame(results, columns=['faa_site_number', 'loc_id', 'airport_name', 'associated_city', 'state', 'region', 'ado', 'use', 'lat_dms', 'long_dms', 'lat_dd', 'long_dd', 'airport_ownership', 'part_139', 'npias_service_level', 'npias_hub_type', 'airport_control_tower', 'fuel', 'other_services', 'based_aircraft_total', 'total_operations'])
+     results = db.session.query(*sel).all()
+     df = pd.DataFrame(results, columns=['faa_site_number', 'loc_id', 'airport_name', 'associated_city', 'state', 'region', 'ado', 'use', 'lat_dms', 'long_dms', 'lat_dd', 'long_dd', 'airport_ownership', 'part_139', 'npias_service_level', 'npias_hub_type', 'airport_control_tower', 'fuel', 'other_services', 'based_aircraft_total', 'total_operations'])
     
     
-    return jsonify(df.to_dict(orient="records"))
+     return jsonify(df.to_dict(orient="records"))
 
 # create route that renders flights.html template
 @app.route("/flights")
@@ -121,9 +120,9 @@ def flight():
 def home():
     return render_template("index.html")
 
-@app.route("/amadeus/<dest>/<dept_date>")
-def getAmadeus(dest, dept_date):
-    url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + key + "&origin=NYC&destination=" + dest + "&departure_date=" + dept_date
+@app.route("/amadeus/<orig>/<dept_date>")
+def getAmadeus(orig, dept_date):
+    url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + key + "&origin=" + orig + "&destination=NYC&departure_date=" + dept_date
 
     results = requests.get(url)
 
@@ -131,7 +130,3 @@ def getAmadeus(dest, dept_date):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
