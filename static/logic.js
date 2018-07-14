@@ -24,8 +24,8 @@ d3.json(url, function(response){
       if (location) {
         L.circle([response[i].lat_dd,response[i].long_dd], {
           fillOpacity: 0.50,
-          color: "black",
-          fillColor: "blue",
+          color: "#808080",
+          fillColor: "#ffdbb2",
           // Setting our circle's radius equal to the output of our markerSize function
           // This will make our marker's size proportionate to its population
           radius: markerSize(response[i].total_operations)
@@ -35,8 +35,17 @@ d3.json(url, function(response){
           "<br>NPIAS Type: " + response[i].npias_service_level +"/"+response[i].npias_hub_type +
           "<br>Total Operations(annual # of departures and arrivals): "+response[i].total_operations
         ).addTo(myMap);
-    }
-  }
-});
+
+          L.circle([response[i].lat_dd,response[i].long_dd], {
+            fillOpacity: 1,
+            color: "black",
+
+            // Setting our circle's radius equal to the output of our markerSize function
+            // This will make our marker's size proportionate to its population
+            radius: 10
+            }).addTo(myMap);
+
+        }
+}});
 
 
