@@ -1,10 +1,8 @@
 // References to button and inputs 
 var searchBtn = document.querySelector("#search");
-//var $originInput = document.querySelector("#origin");
-var destinationInput = document.getElementById("destination");
+var originInput = document.getElementById("origin");
 var departureInput = document.getElementById("departure");
 var table = document.getElementById("myTable")
-//var $returnInput = document.querySelector("#return");
 
 // Add event lister to button, call handleSearchButtonClick when clicked
 searchBtn.addEventListener("click", handleSearchButtonClick);
@@ -13,30 +11,24 @@ searchBtn.addEventListener("click", handleSearchButtonClick);
 // create handleSearchButtonClick function to call api
 function handleSearchButtonClick() {
 
-    // create empty lists for fare, duration, and airport
-    totalFare = [];
-    nycAirports = [];
-    nycDepartTimes = [];
-
     // create chartData array for chart
     var chartData = []
     // create dataSet array for flight data table
     var dataSet = [];
 
-    //var filterOrigin = $originInput.value.trim().toLowerCase();
-    var filterDestination = destinationInput.value.trim().toLowerCase();
+    // remove whitespace and lowercase input
+    var filterOrigin = originInput.value.trim().toLowerCase();
     var filterDeparture = departureInput.value.trim();
-    //var filterReturn = $returnInput.value.trim();
     
     // call amadeus route to do an api call to find fares
-    var url = "../amadeus/" + filterDestination + "/" + filterDeparture;
+    var url = "../amadeus/" + filterOrigin + "/" + filterDeparture;
     
     d3.json(url, function(error,response){
         // Handle errors
         if (error) return console.log(error);
 
         items = response.results
-        console.log(items)
+        //console.log(items)
         for (var i = 0; i < items.length; i++) {
             var fare = items[i].fare.total_price;
 
@@ -54,12 +46,14 @@ function handleSearchButtonClick() {
 
                 // get all data for origin airports and departure times
                 originAirports = []
+                destinationAirports = []
                 departTimes = []
+
                 for (var k = 0; k < flights.length; k++) {
                     var origin = flights[k].origin.airport;
+                    var destination = flights[k].destination.airport;
                     var departTime = flights[k].departs_at;
                     var arriveTime = flights[k].arrives_at;
-                    var markAirline = flights[k].marketing_airline;
                     var opAirline = flights[k].operating_airline;
                     
                     //console.log(departTime)
@@ -72,6 +66,7 @@ function handleSearchButtonClick() {
                     //console.log(origin)
 
                     originAirports.push(origin);
+                    destinationAirports.push(destination);
                     departTimes.push(depart);
                     
                     // console.log(originAirports)
@@ -80,20 +75,49 @@ function handleSearchButtonClick() {
                 
                 };
                 // push data to empty lists    
-                nycAirports.push(originAirports[0]);
-                //nycDepartTimes.push(departTimes[0]);
-                chartData.push({"fare": fare, "depart_time": departTimes[0]});
-                dataSet.push([opAirline, markAirline, fare, originAirports, duration, dt, at]);
+                chartData.push({"fare": fare, "depart_time": departTimes[0], "airport": destinationAirports[destinationAirports.length - 1]});
+                dataSet.push([opAirline, fare, originAirports, destinationAirports.slice(-1), duration, dt, at]);
             
             };
         };
     
-
-        // console.log(totalFare);
-        // console.log(nycAirports);
-        // console.log(nycDepartTimes)
         // console.log(dataSet)
+        // console.log(chartData)
 
+        // sort chartData by time
+        chartData.sort(function(a, b) {
+            return new Date('1970/01/01 ' + a.depart_time) - new Date('1970/01/01 ' + b.depart_time);
+        });
+
+        // set up traces for chart
+        var traces = [];
+        var data = [];
+
+        for (var i = 0; i < chartData.length; i++) {
+            if (data.indexOf(chartData[i].airport) === -1) {
+                traces.push({x: [],
+                        y: [],
+                        mode: 'markers',
+                        name: chartData[i].airport,
+                        });
+                data.push(chartData[i].airport);
+            } else {
+                traces[data.indexOf(chartData[i].airport)].x.push(chartData[i].depart_time);
+                traces[data.indexOf(chartData[i].airport)].y.push(chartData[i].fare);
+            }
+        }
+
+        // set up layout for chart
+        var input = filterOrigin.toUpperCase()
+
+        var flightLayout = {
+            title: `<b>Available Flights for ${filterDeparture} from ${input}</b>`,
+            yaxis: {title: "Total One-Way Fare ($)"},
+            xaxis: {title: "Time of Departure from NYC"}
+        };
+
+        Plotly.newPlot("chart", traces, flightLayout);
+        
         // create flight data table
         $(document).ready(function() {
             $("#myTable").DataTable( {
@@ -101,46 +125,15 @@ function handleSearchButtonClick() {
                 data: dataSet,
                 columns : [
                     {title: "Operating Airline"},
-                    {title: "Marketing Airline"},
                     {title: "Total Fare ($)"},
                     {title: "Departure Airport"},
+                    {title: "Destination Airport"},
                     {title: "Duration (hh:mm)"},
                     {title: "Departing Time"},
                     {title: "Arrival Time"}
                 ]
             });
         });
-
-        // sort chartData by time
-        chartData.sort(function(a, b) {
-            return new Date('1970/01/01 ' + a.depart_time) - new Date('1970/01/01 ' + b.depart_time);
-        });
-        
-        for (var i = 0; i < chartData.length; i++) {
-            totalFare.push(chartData[i].fare);
-            nycDepartTimes.push(chartData[i].depart_time);
-        };
-
-        // console.log(totalFare);
-        // console.log(nycDepartTimes);
-
-        // create scatterplot with populated list data    
-        var flightData = [{
-            x:  nycDepartTimes,
-            y: totalFare,
-            hovertext: nycAirports,
-            mode: "markers",
-            type: "scatter"
-        }];
-
-        // set up layout for chart
-        var flightLayout = {
-            title: `<b>Available Flights for ${filterDeparture} to ${filterDestination}</b>`,
-            yaxis: {title: "Total One-Way Fare ($)"},
-            xaxis: {title: "Time of Departure from NYC"}
-        };
-
-        Plotly.newPlot("chart", flightData, flightLayout);
     
     });
 };
