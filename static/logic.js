@@ -18,7 +18,7 @@ function markerSize(population) {
 var url = "/airports"
 
 d3.json(url, function(response){
-
+    console.log(response)
     for (var i = 0; i < response.length; i++) {
     
       if (location) {
