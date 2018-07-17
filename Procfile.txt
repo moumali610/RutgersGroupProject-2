@@ -1,3 +1,1 @@
 worker: python app.py
-[requires]
-python_version = "3.6"
