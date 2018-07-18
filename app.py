@@ -1,14 +1,14 @@
 # import necessary libraries
 from sqlalchemy import func
 import pymongo
-from flask_pymongo import PyMongo
+#from flask_pymongo import PyMongo
 from bson.json_util import dumps, loads
 import numpy as np
 import pandas as pd
 import json
 import os
 import requests
-from keys import key 
+#from keys import key #uncomment if you are running locally
 
 from flask import (
     Flask,
@@ -20,12 +20,14 @@ from flask import (
 #################################################
 # Flask Setup
 #################################################
-app = Flask(__name__)
 
+app = Flask(__name__)
+mongokey = os.environ.get("mongokey") #comment out if you're running locally
+key = os.environ.get("key") #comment out if you're running locally
 #################################################
 # Database Setup
 #################################################
-conn = "mongodb+srv://syverts1:Sn557239@cluster0-lqw3j.mongodb.net/test?retryWrites=true"
+conn = "mongodb+srv://" + mongokey + "@cluster0-lqw3j.mongodb.net/test?retryWrites=true"
 #pip install dnspython needed to connect to mongodb server online
 client = pymongo.MongoClient(conn)
 
