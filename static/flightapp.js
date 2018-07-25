@@ -20,8 +20,8 @@ function handleSearchButtonClick() {
     var filterOrigin = originInput.value.trim().toLowerCase();
     var filterDeparture = departureInput.value.trim();
 
-    var key = "bZ1DSdW6nkhqkeXDz3Q6cmHYwIzA2kNf";
-    var url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + key + "&origin=" + filterOrigin + "&destination=NYC&departure_date=" + filterDeparture;
+    
+    var url = "/amadeus/" + filterOrigin + "/" + filterDeparture;
     console.log(url);    
 
     // create a new request object 
