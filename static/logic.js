@@ -48,4 +48,8 @@ d3.json(url, function(response){
         }
 }});
 
+function myFunction() {
+  document.getElementById("demo").innerHTML = "Hello World";
+}
+
 
