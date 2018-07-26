@@ -29,12 +29,12 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-# conn = "mongodb+srv://" + mongokey + "@cluster0-lqw3j.mongodb.net/test?retryWrites=true"
-# #pip install dnspython needed to connect to mongodb server online
-# client = pymongo.MongoClient(conn)
+conn = "mongodb+srv://" + mongokey + "@cluster0-lqw3j.mongodb.net/test?retryWrites=true"
+#pip install dnspython needed to connect to mongodb server online
+client = pymongo.MongoClient(conn)
 
-# db = client.travel
-# collection = db.airports
+db = client.travel
+collection = db.airports
 
 #################################################
 # Flask Routes
