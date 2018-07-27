@@ -1,0 +1,62 @@
+RANK;COUNTRY;AIRPORT;NO._OF_PASSENGERS;%_CHANGE_2016-17
+1;United States;Hartsfield-Jackson Atlanta International Airport;103,902,992;-0.26
+2;China;Beijing Capital International Airport;95,786,442;1.47
+3;United Arab Emirates;Dubai International Airport;88,242,099;5.48
+4;United States;Los Angeles International Airport;84,557,968;4.49
+5;United States;O'Hare International Airport;79,828,183;2.4
+6;United Kingdom;Heathrow Airport;78,014,598;3.04
+7;Japan;Tokyo International (Haneda) Airport;76,476,251;-4.04
+8;Hong Kong;Hong Kong International Airport;72,665,078;3.36
+9;China;Pudong International Airport;70,001,237;6.06
+10;France;Aéroport de Paris-Charles de Gaulle;69,471,442;5.37
+11;Netherlands;Amsterdam Airport Schiphol;68,515,425;7.69
+12;United States;Dallas/Ft Worth International Airport;67,092,194;2.28
+13;China;Guangzhou Bai Yun International Airport;65,887,473;10.3
+14;Germany;Flughafen Frankfurt/Main;64,500,386;6.11
+15;Turkey;Atatürk International Airport;63,859,785;5.94
+16;India;Indira Gandhi International Airport;63,451,503;14.06
+17;Indonesia;Soekarno-Hatta International Airport;63,015,620;8.28
+18;Singapore;Singapore Changi Airport;62,220,000;6
+19;Korea, Republic Of;Incheon International Airport;62,157,834;7.45
+20;United States;Denver International Airport;61,379,396;5.34
+21;Thailand;Suvarnabhumi International Airport;60,860,557;8.89
+22;United States;John F. Kennedy International Airport;59,392,500;0.49
+23;Malaysia;KL International Airport;58,558,440;11.23
+24;United States;San Francisco International Airport;55,822,129;5.12
+25;Spain;Aeropuerto de Adolfo Suárez Madrid-Barajas;53,386,075;5.93
+26;China;Chengdu Shuangliu International Airport;49,801,693;8.17
+27;United States;McCarran International Airport;48,566,803;2.25
+28;Spain;Aeropuerto de Barcelona-El Prat;47,262,826;7.1
+29;India;Chhatrapati Shivaji International Airport;47,204,259;5.65
+30;Canada;Toronto Pearson International Airport;47,054,696;6.17
+31;United States;Seattle-Tacoma International Airport;46,934,194;2.62
+32;United States;Charlotte Douglas International Airport;45,909,899;3.35
+33;United Kingdom;Gatwick Airport;45,561,694;5.25
+34;China;Shenzhen Baoan International Airport;45,558,409;8.54
+35;Taiwan, (R.O.C.);Taiwan Taoyuan International Airport;44,878,703;6.11
+36;Mexico;Aeropuerto Internacional de la Ciudad de México "Lic Benito Juárez";44,732,418;8.02
+37;China;Kunming International Airport;44,729,736;6.55
+38;Germany;Munich Airport;44,577,241;5.48
+39;United States;Orlando International Airport;44,511,265;6.17
+40;United States;Miami International Airport;44,071,313;-1.15
+41;United States;Sky Harbor International Airport;43,921,670;1.24
+42;Australia;Sydney International Airport;43,410,355;3.44
+43;United States;Newark Liberty International Airport;43,393,499;7.01
+44;Philippines;Ninoy Aquino International Airport;42,022,484;6.21
+45;China;Hongqiao International Airport;41,884,059;3.52
+46;China;Xi'an-Xianyang International Airport;41,857,406;13.15
+47;Italy;Aeroporto di Roma-Fiumicino;40,968,756;-1.84
+48;United States;George Bush Intercontinental Airport;40,696,189;-2.23
+49;Japan;Narita International Airport;40,631,193;4.19
+50;Russian Federation;Sheremetyevo International Airport;40,092,806;17.81
+51;United States;Logan International Airport;38,454,539;5.77
+52;Thailand;Don Mueang International Airport;38,299,376;8.79
+53;United States;Minneapolis/St Paul International Airport;38,034,341;1.41
+54;Brazil;Guarulhos International Airport;38,008,955;3.16
+55;Australia;Melbourne Airport;35,997,230;3.92
+56;China;Hangzhou Xiaoshan International Airport;35,570,411;12.58
+57;Qatar;Hamad International Airport;35,270,410;-5.4
+58;United States;Detroit Metropolitan Wayne County Airport;34,701,497;0.87
+59;Saudi Arabia;King Abulaziz International Airport;33,929,895;9.13
+60;United States;Ft Lauderdale-Hollywood International Airport;32,511,053;11.32
+68;United States;LaGuardia Airport;29,502,219;-1.01

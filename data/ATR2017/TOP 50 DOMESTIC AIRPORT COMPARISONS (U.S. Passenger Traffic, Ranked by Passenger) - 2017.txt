@@ -1,0 +1,62 @@
+RANK;CITY;STATE;AIRPORT;NO._OF_PASSENGERS;%_CHANGE_2016-17
+1;Atlanta;GA;Hartsfield-Jackson Atlanta International Airport;103,902,992;-0.26
+2;Los Angeles;CA;Los Angeles International Airport;84,557,968;4.49
+3;Chicago;IL;O'Hare International Airport;79,828,183;2.4
+4;Dallas/Fort Worth;TX;Dallas/Ft Worth International Airport;67,092,194;2.28
+5;Denver;CO;Denver International Airport;61,379,396;5.34
+6;New York;NY;John F. Kennedy International Airport;59,392,500;0.49
+7;San Francisco;CA;San Francisco International Airport;55,822,129;5.12
+8;Las Vegas;NV;McCarran International Airport;48,566,803;2.25
+9;Seattle;WA;Seattle-Tacoma International Airport;46,934,194;2.62
+10;Charlotte;NC;Charlotte Douglas International Airport;45,909,899;3.35
+11;Orlando;FL;Orlando International Airport;44,511,265;6.17
+12;Miami;FL;Miami International Airport;44,071,313;-1.15
+13;Phoenix;AZ;Sky Harbor International Airport;43,921,670;1.24
+14;Newark;NJ;Newark Liberty International Airport;43,234,161;6.58
+15;Houston;TX;George Bush Intercontinental Airport;40,696,189;-2.23
+16;Boston;MA;Logan International Airport;38,454,539;5.77
+17;Minneapolis;MN;Minneapolis/St Paul International Airport;38,034,341;1.41
+18;Detroit;MI;Detroit Metropolitan Wayne County Airport;34,701,497;0.87
+19;Fort Lauderdale;FL;Ft Lauderdale-Hollywood International Airport;32,511,053;11.32
+20;Philadelphia;PA;Philadelphia International Airport;29,585,754;-1.89
+21;New York;NY;LaGuardia Airport;29,502,219;-1.01
+22;Baltimore;MD;Baltimore/Washington International Thurgood Marshall Airport;26,369,411;4.96
+23;Salt Lake City;UT;Salt Lake City International Airport;24,198,816;4.5
+24;Washington;DC;Ronald Reagan Washington National Airport;23,911,156;1.34
+25;Washington;DC;Washington Dulles International Airport;22,708,073;4.04
+26;Chicago;IL;Midway International Airport;22,352,080;-1.44
+27;San Diego;CA;San Diego International Airport;22,173,493;6.98
+28;Tampa;FL;Tampa International Airport;19,624,284;3.66
+29;Portland;OR;Portland International Airport;19,080,494;3.97
+30;Dallas;TX;Love Field;15,723,617;1.03
+31;St Louis;MO;Lambert-St Louis International Airport;14,730,441;5.53
+32;Nashville;TN;Nashville International Airport;14,133,829;8.89
+33;Austin;TX;Austin-Bergstrom International Airport;13,889,305;11.68
+34;Houston;TX;W. P. Hobby Airport;13,435,672;4.08
+35;Oakland;CA;Oakland International Airport;13,072,245;8.29
+36;San Jose;CA;Norman Y. Mineta San Jose International Airport;12,480,232;15.59
+37;New Orleans;LA;Louis Armstrong New Orleans International Airport;12,241,172;7.79
+38;Raleigh-Durham;NC;Raleigh-Durham International Airport;11,671,693;5.63
+39;Kansas City;MO;Kansas City International Airport;11,503,940;4.19
+40;Sacramento;CA;Sacramento International Airport;10,912,079;7.84
+41;Santa Ana;CA;John Wayne Airport;10,423,578;-0.69
+42;Cleveland;OH;Cleveland Hopkins International Airport;9,140,318;8.62
+43;San Antonio;TX;San Antonio International Airport;9,063,542;5.17
+44;Pittsburgh;PA;Pittsburgh International Airport;8,988,016;8.16
+45;Fort Myers;FL;Southwest Florida International Airport;8,842,549;2.76
+46;Indianapolis;IN;Indianapolis International Airport;8,770,308;3.04
+47;Cincinnati;OH;Cincinnati/Northern Kentucky International Airport;8,102,866;19.62
+48;Columbus;OH;Port Columbus International Airport;7,576,592;3.45
+49;Milwaukee;WI;General Mitchell International Airport;6,904,670;2.18
+50;Hartford;CT;Bradley International Airport;6,436,407;6.19
+51;West Palm Beach;FL;Palm Beach International Airport;6,322,452;0.93
+52;Jacksonville;FL;Jacksonville International Airport;5,589,249;-0.05
+53;Anchorage;AK;Ted Stevens Anchorage International Airport;5,428,490;-1.51
+54;Albuquerque;NM;Albuquerque International Sunport;4,958,417;3.84
+55;Burbank;CA;Bob Hope Airport;4,739,466;14.4
+56;Buffalo;NY;Buffalo Niagara International Airport;4,691,532;1.58
+57;Omaha;NE;Eppley Airfield;4,611,906;6.03
+58;Ontario;CA;LA/Ontario International Airport;4,558,118;7.31
+59;Memphis;TN;Memphis International Airport;4,364,881;4.98
+60;Charleston;SC;Charleston International Airport;3,987,427;9.04
+114;Newburgh;NY;New York Stewart International Airport;448,698;62.9
