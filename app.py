@@ -29,12 +29,12 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-conn = "mongodb+srv://" + mongokey + "@cluster0-lqw3j.mongodb.net/test?retryWrites=true"
-#pip install dnspython needed to connect to mongodb server online
-client = pymongo.MongoClient(conn)
+# conn = "mongodb+srv://" + mongokey + "@cluster0-lqw3j.mongodb.net/test?retryWrites=true"
+# #pip install dnspython needed to connect to mongodb server online
+# client = pymongo.MongoClient(conn)
 
-db = client.travel
-collection = db.airports
+# db = client.travel
+# collection = db.airports
 
 #################################################
 # Flask Routes
@@ -50,7 +50,7 @@ def countries():
 
 # Query the database for names and send the jsonified results
 @app.route('/airports')
-def airport():
+def airports():
     airports = list(collection.find())
     print(airports)
     airports_df = pd.DataFrame(airports)
@@ -59,16 +59,17 @@ def airport():
     airports_df = airports_df.fillna(value="")
     return jsonify(airports_df.to_dict(orient="records"))
     
+# create route that renders airport.html template
+@app.route("/NYCairports")
+def NYCairports():
+    return render_template("airport.html", key=key)
+
 
 # create route that renders bio.html template
 @app.route("/Team")
 def Team():
     return render_template("bio.html", key=key)
 
-# create route that renders airports.html template
-@app.route("/airports")
-def airports():
-    return render_template("airports.html", key=key)
 
 # create route that renders flights.html template
 @app.route("/flights")
