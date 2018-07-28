@@ -169,7 +169,7 @@ function handleSearchButtonClick() {
         }]
         
         var barLayout = {
-            title: "Average Prices for Each Airport",
+            title: "Median Price for Each Airport",
             xaxis: {title: "Arrival Airport"},
             yaxis: {title: "Prices ($)"}
         }
