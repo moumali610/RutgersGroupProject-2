@@ -50,7 +50,7 @@ def countries():
 
 # Query the database for names and send the jsonified results
 @app.route('/airports')
-def airports():
+def airport():
     airports = list(collection.find())
     print(airports)
     airports_df = pd.DataFrame(airports)
@@ -59,17 +59,16 @@ def airports():
     airports_df = airports_df.fillna(value="")
     return jsonify(airports_df.to_dict(orient="records"))
     
-# create route that renders airport.html template
-@app.route("/NYCairports")
-def NYCairports():
-    return render_template("airport.html", key=key)
-
 
 # create route that renders bio.html template
 @app.route("/Team")
 def Team():
     return render_template("bio.html", key=key)
 
+# create route that renders airports.html template
+@app.route("/NYCairports")
+def airports():
+    return render_template("airport.html", key=key)
 
 # create route that renders flights.html template
 @app.route("/flights")
@@ -81,6 +80,7 @@ def flight():
 def home():
     return render_template("index.html")
 
+
 @app.route("/amadeus/<orig>/<dept_date>")
 def getAmadeus(orig, dept_date):
     url = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=" + key + "&origin=" + orig + "&destination=NYC&departure_date=" + dept_date
@@ -88,6 +88,7 @@ def getAmadeus(orig, dept_date):
     results = requests.get(url)
 
     return jsonify(results.json())
+
 
 if __name__ == "__main__":
     app.run(debug=True)
