@@ -8,7 +8,7 @@ import pandas as pd
 import json
 import os
 import requests
-#from keys import key, mongokey #uncomment if you are running locally
+from keys import key, mongokey #uncomment if you are running locally
 
 from flask import (
     Flask,
@@ -23,8 +23,8 @@ from flask import (
 #################################################
 
 app = Flask(__name__)
-mongokey = os.environ.get("mongokey")  #comment out if you're running locally
-key = os.environ.get("key")  #comment out if you're running locally
+#mongokey = os.environ.get("mongokey")  #comment out if you're running locally
+#key = os.environ.get("key")  #comment out if you're running locally
 #################################################
 # Database Setup
 #################################################
