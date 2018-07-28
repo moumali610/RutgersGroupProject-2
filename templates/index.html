@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></link>
+  
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -50,13 +52,13 @@
       <a class="nav-link" href="../">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/airports">NYC airports</a>
+        <a class="nav-link" href="/NYCairports">NYC airports</a>
       </li>
     <li class="nav-item">
       <a class="nav-link" href="/flights">Search Flights</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/Team">Contact Us</a>
+      <a class="nav-link" href="/Team">About</a>
     </li>
   </ul>
 </nav>
@@ -75,29 +77,30 @@
     <div class="row">
       <!--First of Two Columns-->
       <div class="col-md-4">
-          <h2>Mision Statement</h2>
-            <p>To bring global travelers within NYC reach.</p>
-          <h2>Vision</h2>
-                <p>
-                    This project looks to analyze information about NYC airports, flights and fares.
-                </p>
-                <p> 
-                    It is difficult to find resources that show airport analysis and fare pricing that are accessible to to the public. 
-                    In cases where the data is available, it doesn't seem to be in a dashboard or analyzed format.
-                  <br>
-                  <br>
-                  Considering: 
-                  <ul>
-                    <li>The NYC Open Data Policy</li>
-                    <li>Lack of open source, analyzed data on airports, flights, and fares</li>
-                  </ul> 
-                </p>
-                <p>We are REALLY passionate about airports (they are a door to Narnia that you can only get into by going through TSA) - a real world of wonder</p>
+          <h2>Welcome!</h2>
+            <p>Finding a flight to New York City has never been easier!</p>
+            <p>Here at ChiViME, you can trust to find an analysis of NYC flights based on major factors: 
+              <ul>
+                <li>Flight fares</li>
+                <li>NYC airport features</li>
+                <li>City Information</li>
+              </ul>
+            </p>
+            <!-- Instructions for using the website -->
+            <h2>Exploring ChiViMe</h2>
+            <ul>
+            <li>Need help deciding which airport to land at? Check out our <bold>NYC Airport</bold> page!</li>
+            <li>Working with a budget? Our <bold>Search Flights</bold> tool will get you an analysis of fare prices! </li>
+            </ul>
 
+
+ 
       </div>
       <!--Second of Two Columns-->
       <div class="col-md-8">
+        <h3>New York City Airports</h3>
         <div class="container mt-1 mb-1" id="map"></div>
+        Airport map with circles for each airport in NJ and NY. The map has been zoomed in to show the top four airports of the NYC area: Newark (EWR), John F Kennedy (JFK), LaGuardia (LGA), and Stewart (SWF). The circles are scaled to represent the annual amount of departures and arrivals.
       </div>
     </div>
 </div>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+   
+  <title>To New York, with LOVE</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></link>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!--Emoji-->
+<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+  integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+  crossorigin=""></script>
+
+  <!-- d3 JavaScript -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+
+  <!-- Marker Cluster JS & CSS -->
+  <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+  
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#">
+    <img src="{{ url_for('static', filename='heart.png') }}" alt="logo" style="width:40px;">
+  </a>
+
+  <!-- Links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="../">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/NYCairports">NYC airports</a>
+      </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/flights">Search Flights</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/Team">About</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container mt-2">
+
+
+<div class="container mt-2">
+  <div class="jumbotron">
+      <h1 id="proj-title">Destination: NYC Airports</h1>
+    </div>  
+ 
+
+<!-- About NYC Airports -->
+<h2>About New York City Airports</h2>
+<p>New York City is a popular tourist destination for travelers around the world, as well as a global business hub.
+  City visitors, especially those traveling outside of the country, are most likely to opt for a flight into one of 
+  the major airports in the NY/NJ region.</p>
+
+<p>There are three major airports that serve the New York Metropolitan Area, while there are smaller, nearby airports open to the public.</p>
+
+
+<!-- Bootstrap Kitchen Sink for each major Airport -->
+<div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+         <!-- jfk card -->
+         <div class="card" style="width: 18rem;">
+            
+            <img class="card-img-top" src="{{ url_for('static', filename='jfk.png') }}" alt="JFK-Aiport-cap-img">
+            
+            <div class="card-body">
+              <h5 class="card-title">John F. Kennedy International Airport (JFK)</h5>
+              <p class="card-text">Covering 4,930 aces of land, JFK is the busiest aiport in the New York area. It has been long recognized as the premier U.S. gateway for passengers.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Location: Jamaica Bay, Queens
+                  County, New York City</li>
+              <li class="list-group-item">General Info: 718-244-4444</li>
+              <li class="list-group-item">Distance from midtown Manhattan: 15 miles by
+                  highway</li>
+            </ul>
+            <div class="card-body">
+              <a href="https://www.jfkairport.com/" class="card-link">Website</a>
+            </div>
+          </div>
+      </div>
+
+      <div class="col-sm-4">
+        <!-- lga card -->
+        <div class="card" style="width: 18rem;">
+                
+            <img class="card-img-top" src="{{ url_for('static', filename='lga.png') }}" alt="LGA-Aiport-cap-img">
+            
+            <div class="card-body">
+              <h5 class="card-title">LaGuardia Airport (LGA)</h5>
+              <p class="card-text">LGA aiport is one of the nation’s
+                  leading domestic gateways for business
+                  and leisure travel, and is the primary
+                  business/short-haul airport for New
+                  York City. It covers 680 acres of land.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Location: Queens, New York </li>
+              <li class="list-group-item">General Info: 718-533-3400</li>
+              <li class="list-group-item">Distance from Midtown Manhattan: 8
+                  miles by highway </li>
+            </ul>
+            <div class="card-body">
+              <a href="https://www.laguardiaairport.com/" class="card-link">Website</a>
+            </div>
+          </div>
+      </div>
+
+
+
+      <div class="col-sm-4">
+        <!-- ewr card -->
+        <div class="card" style="width: 18rem;">
+            
+            <img class="card-img-top" src="{{ url_for('static', filename='ewr.png') }}" alt="EWR-Aiport-cap-img">
+            
+            <div class="card-body">
+              <h5 class="card-title">Newark International Airport (EWR)</h5>
+              <p class="card-text">Occupies 2,027 acres, while being among the busiest North American and international airport.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Location: Newark, New Jersey</li>
+              <li class="list-group-item">General Info: 973-961-6000</li>
+              <li class="list-group-item">Distance from Midtown Manhattan: 18 miles by highway </li>
+            </ul>
+            <div class="card-body">
+              <a href="https://www.newarkairport.com/" class="card-link">Website</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+       
+
+
+<center>
+<!-- SWF small info box -->
+<div class="card" style="width: 50rem;">
+    <div class="card-header">
+      Stewart International Airport (SWF)
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Location: Newburgh/New
+          Windsor in Orange County, New York 
+          <br>
+          General Info: 845-838-8200
+          <br>
+          Distance from Midtown Manhattan: 60 miles
+          <br>
+    </ul>
+    <div class="card-body">
+      <a href="https://www.swfny.com/" class="card-link">Website</a>
+    </div>
+  </div>
+</center> 
+
+<br>
+<br>
+
+
+<h2>Analyzing NYC Airport Data</h2>
+
+<p>Click <a href="https://public.tableau.com/profile/chivime#!/vizhome/AirportTraffic_2/Traffic">here.</a> to see airport traffic statistics over time for EWR, JFK, LGA, and SWF</p>
+
+
+<p>Click <a href="https://public.tableau.com/profile/chivime#!/vizhome/2017AirportSummary/2017AirportSummarys">here</a> to see the summary of the top international and domestic airports with highest passenger traffic in 2017 as well as an overview of to our favorite NY/NJ airports.</p>
+
+
+
+</div> 
+
+
+<br>
+<br>
+<br>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- Our JS -->
+  <script src="{{ url_for('static', filename='logic.js') }}"></script>
+</body>
+</html>
+
