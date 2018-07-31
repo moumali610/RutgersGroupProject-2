@@ -1,4 +1,6 @@
-# RutgersGroupProject-2
+# To New York with LOVE
+
+Application deployed at: https://nyc-air.herokuapp.com
 
 data/countries.geojson is from https://github.com/datasets/geo-countries who got this data from Natural Earth.
 
